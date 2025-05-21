@@ -1,10 +1,3 @@
-# Proyecto Final Sistemas Operativos
-
-- Roberto Sandoval 598270
-- Mauricio Gonzalez 594595
-- Rolando Rivas 594276
-- Carlos Garcia 613250
-
 ## Sistema de Eventos y Scheduling OS (Cliente-Servidor con GUI)
 
 Este proyecto implementa un sistema distribuido simple basado en una arquitectura cliente-servidor en la que se manejan eventos, suscripciones y otras opciones para los clientes, los cuales se encargaran de analizar archivos de texto con regex mientras organizan su carga de trabajo con algoritmos de scheduling.
