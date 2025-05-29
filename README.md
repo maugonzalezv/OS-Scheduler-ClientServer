@@ -1,85 +1,118 @@
-## Sistema de Eventos y Scheduling OS (Cliente-Servidor con GUI)
+## 🧠 Event & Scheduling System (Client-Server with GUI)
 
-Este proyecto implementa un sistema distribuido simple basado en una arquitectura cliente-servidor en la que se manejan eventos, suscripciones y otras opciones para los clientes, los cuales se encargaran de analizar archivos de texto con regex mientras organizan su carga de trabajo con algoritmos de scheduling.
+This project implements a simple distributed system based on a client-server architecture where events, subscriptions, and scheduling algorithms are handled. Clients connect to the server to receive tasks triggered by events, process text files using regex, and manage workload using different scheduling algorithms.
 
-El directorio `src/` consta de dos programas principales:
+The `src/` directory contains the two main programs:
 
-1.  **Servidor (`server.py`):** 
-	1. Programa CLI
-	2. Gestiona eventos y las suscripciones
-	3. dispara triggers
-	4. Configura no. de threads a usar
-2.  **Cliente (`client_gui.py`):** 
-	1. Aplicación GUI
-	2. Se conecta al servidor mediante una IP y puerto
-	3. Opcion de suscribirse/desuscribirse a eventos
-	4. Opcion de escoger el algoritmo que quieras
-	5. Recibe triggers del server
-	6. Procesa archivos `.txt`
-	7. Visualiza el estado del procesamiento, las métricas de los procesos y el resultado de la extracción de datos en un archivo CSV.
+1. **Server (`server.py`)**
+   - Command-line application
+   - Manages events and client subscriptions
+   - Triggers tasks when events occur
+   - Allows configuration of thread count
 
-## Estructura del Proyecto
+2. **Client (`client_gui.py`)**
+   - Graphical interface (GUI)
+   - Connects to the server using an IP and port
+   - Subscribe/unsubscribe to events
+   - Select scheduling algorithms
+   - Receives and processes `.txt` files on trigger
+   - Displays process status, metrics, and regex data extraction results in a CSV file
+
+---
+
+## 📁 Project Structure
 
 ```text
 .
-├── README.md           # Este archivo
-├── CONTRIBUTING.md     # Guía para colaboradores
-├── TODO.md             # Lista de tareas pendientes y mejoras
-├── requirements.txt    # Dependencias de Python
-├── src/                # Directorio/Paquete con el código fuente
-│   ├── __init__.py     #   (Necesario, puede estar vacío) Indica a Python que 'src' es un paquete
-│   ├── server.py       #   Código fuente del servidor
-│   └── client_gui.py   #   Código fuente de la aplicación cliente con GUI
-│   ├── scheduler.py    #   Módulo para algoritmos de scheduling
-│   └── process.py      #   Módulo para la clase Process
-├── text_files/         # Directorio para los archivos .txt a procesar (crear manualmente)
-└── output/             # Directorio donde los clientes guardarán los CSVs (creado por el cliente)
+├── README.md           # This file
+├── CONTRIBUTING.md     # Guide for contributors
+├── TODO.md             # Pending tasks and improvements
+├── requirements.txt    # Python dependencies
+├── src/                # Source code package
+│   ├── __init__.py     
+│   ├── server.py       # Server code
+│   ├── client_gui.py   # GUI-based client code
+│   ├── scheduler.py    # Scheduling algorithms module
+│   └── process.py      # Process class module
+├── text_files/         # Folder for input .txt files (create manually)
+└── output/             # Output folder for CSVs (created by the client)
 ```
 
-**Nota:** Los archivos `scheduler.py` y `process.py` son propuestas para mejorar la modularidad, pero actualmente su funcionalidad puede estar integrada en `client_gui.py` en el esqueleto inicial.
+> **Note:** The files `scheduler.py` and `process.py` are proposals to improve modularity, but their functionality may currently be integrated into `client_gui.py` in the initial implementation.
 
-## Instalación
+---
 
-1.  Clona este repositorio:
-    ```bash
-    git clone https://github.com/ChocoRolis/proyecto-final-SO.git
-    cd proyecto-final-SO/
-    ```
+## 🚀 Installation
 
-## Uso
+1. Clone this repository:
 
-1.  **Iniciar el Servidor:**
-    Abre una terminal y ejecuta:
-    ```bash
-    python3 -m src.server
-    ```
-    El servidor se iniciará y esperará conexiones. Comandos: (`add <evento>`, `trigger <evento>`, `set_threads <N>`, `list`, `exit`).
+```bash
+git clone https://github.com/ChocoRolis/proyecto-final-SO.git
+cd proyecto-final-SO/
+```
 
-2.  **Preparar Archivos `.txt`:**
-    Coloca en `text_files` los archivos de texto (`.txt`) que quieres que los clientes procesen. Asegúrate de que contengan los patrones que definirás para la extracción con Regex.
+---
 
-3.  **Iniciar el Cliente(s):**
-    Abre una o varias terminales (una por cada cliente que quieras simular) y ejecuta:
-    ```bash
-    python3 -m src.client_gui
-    ```
-    Se abrirá la interfaz gráfica del cliente.
+## 🧪 Usage
 
-4.  **Interactuar con el Cliente (GUI):**
-    *   Ingresa la IP y Puerto del servidor (por defecto `127.0.0.1:65432`) y haz clic en "Conectar".
-    *   Una vez conectado, ingresa el nombre de un evento (ej. `data_ready`) y haz clic en "Suscribir".
-    *   Selecciona un algoritmo de scheduling en el ComboBox.
-    *   (Opcional) Espera a que el servidor dispare un evento o pídele a alguien que controle el servidor que dispare un evento al que estés suscrito.
-    *   Cuando se reciban tareas (tras un trigger), haz clic en "Iniciar Simulación" para comenzar a procesarlas según el algoritmo seleccionado y el número de threads configurado por el servidor.
-    *   Observa las pestañas "Tabla de Procesos", "Gantt" y "Vista Previa CSV" para ver el progreso.
+### 1. Start the Server
 
-5.  **Detener el Servidor:**
-    En la terminal del servidor, escribe `exit` y presiona Enter. Esto notificará a los clientes que el servidor se está cerrando.
+Open a terminal and run:
 
-## Tareas Pendientes 
+```bash
+python3 -m src.server
+```
 
-Consulta el archivo to-do [`TODO.md`](TODO.md) para ver la lista de funcionalidades que faltan implementar.
+The server will start and wait for incoming client connections. Available commands:
+- `add <event>`
+- `trigger <event>`
+- `set_threads <N>`
+- `list`
+- `exit`
 
-## Contribuciones
+---
 
-Revisa el archivo [`CONTRIBUTING.md`](CONTRIBUTING.md) para ver como contribuir codigo a este repo.
+### 2. Prepare `.txt` Files
+
+Place the `.txt` files to be processed in the `text_files/` directory. Make sure they include patterns that will be used for regex-based data extraction.
+
+---
+
+### 3. Start the Client(s)
+
+Open one or more terminals (one per client to simulate) and run:
+
+```bash
+python3 -m src.client_gui
+```
+
+This will launch the client's graphical interface.
+
+---
+
+### 4. Interact with the Client (GUI)
+
+- Enter the server's IP and port (default: `127.0.0.1:65432`) and click **Connect**.
+- Once connected, enter the name of an event (e.g., `data_ready`) and click **Subscribe**.
+- Select a scheduling algorithm from the ComboBox.
+- *(Optional)* Wait for the server to trigger an event or ask someone managing the server to trigger one you’re subscribed to.
+- When tasks are received (after a trigger), click **Start Simulation** to begin processing them according to the selected scheduling algorithm and the number of threads set by the server.
+- Use the tabs **Process Table**, **Gantt**, and **CSV Preview** to monitor progress and results.
+
+---
+
+### 5. Stop the Server
+
+In the server terminal, type `exit` and press Enter. This will gracefully shut down the server and notify all connected clients.
+
+---
+
+## 📌 Pending Tasks
+
+Check the [`TODO.md`](TODO.md) file for the list of functionalities yet to be implemented.
+
+---
+
+## 🤝 Contributions
+
+See the [`CONTRIBUTING.md`](CONTRIBUTING.md) file for how to contribute code to this repository.
